@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Developer Resume Builder</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @media print {
+            @page { margin: 0; size: A4; }
+            body * { visibility: hidden; }
+            #navbar, #editor-view, #tab-controls { display: none !important; }
+            #preview-container, #resume-preview, #resume-preview * { visibility: visible; }
+            #preview-container { position: absolute; left: 0; top: 0; width: 100%; margin: 0; padding: 0; background: white; }
+            #resume-preview { width: 100% !important; max-width: 100% !important; box-shadow: none !important; margin: 0 !important; padding: 40px !important; min-height: 100vh; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-800">
+    <nav id="navbar" class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-indigo-600 p-2 rounded-lg"><i data-lucide="code-2" class="h-6 w-6 text-white"></i></div>
+                    <h1 class="text-xl font-bold text-gray-900 hidden sm:block">Web Dev Resume Builder</h1>
+                </div>
+                <div id="tab-controls" class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                    <button onclick="switchTab('editor')" id="btn-editor" class="flex items-center space-x-2 px-4 py-2 rounded-md transition-all bg-white shadow-sm text-gray-800 font-medium"><i data-lucide="edit-3" class="w-4 h-4"></i><span>Editor</span></button>
+                    <button onclick="switchTab('preview')" id="btn-preview" class="flex items-center space-x-2 px-4 py-2 rounded-md transition-all text-gray-600 hover:text-gray-900"><i data-lucide="eye" class="w-4 h-4"></i><span>Preview</span></button>
+                </div>
+                <button onclick="window.print()" class="flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 font-medium"><i data-lucide="download" class="w-4 h-4"></i><span>Download PDF</span></button>
+            </div>
+        </div>
+    </nav>
+    <main class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+        <div id="editor-view" class="grid grid-cols-1 gap-8 fade-in max-w-4xl mx-auto">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6 border-b border-gray-100 bg-gray-50 flex items-center space-x-3"><div class="bg-indigo-100 p-2 rounded-full"><i data-lucide="user" class="h-5 w-5 text-indigo-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Personal Details</h2></div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6" id="personal-form"></div>
+            </div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6 border-b border-gray-100 bg-gray-50 flex items-center space-x-3"><div class="bg-indigo-100 p-2 rounded-full"><i data-lucide="globe" class="h-5 w-5 text-indigo-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Web Projects</h2></div>
+                <div class="p-6 space-y-6" id="projects-form"></div>
+            </div>
+            <div class="text-center text-sm text-gray-500 bg-indigo-50 p-4 rounded-lg border border-indigo-100"><p><strong>Tip:</strong> Education and Skills are pre-loaded.</p></div>
+        </div>
+        <div id="preview-container" class="hidden flex justify-center"><div id="resume-preview" class="bg-white shadow-2xl w-[210mm] min-h-[297mm] p-12 text-gray-900 leading-normal"></div></div>
+    </main>
+    <script>
+        const state = {
+            personalInfo: { name: "Bhanu Saini", title: "Full-Stack Web Developer | IIT Madras Student", email: "bhanupsaini2024@gmail.com", phone: "+91 89497 31495", location: "Jaipur, India", linkedin: "linkedin.com/in/bhanu-saini-3bb251391", github: "github.com/bhanu2006-24", website: "bhanu2006-24.github.io/bhanu2006-24", summary: "Passionate Full-Stack Web Developer building modern, responsive web applications with React, Node.js, and TailwindCSS. Expert in creating beautiful user interfaces with seamless user experiences." },
+            education: [{ school: "Indian Institute of Technology, Madras", degree: "B.Sc. in Data Science", year: "2025 – 2028", description: "Strong foundation in programming, algorithms, and computational thinking." }, { school: "Kendriya Vidyalaya No. 2, Jaipur", degree: "High School Education", year: "Graduated", description: "Strong foundation in STEM academics." }],
+            skills: { frontend: ["React.js", "Next.js", "HTML5", "CSS3", "TailwindCSS", "JavaScript"], backend: ["Node.js", "Express.js", "Flask", "REST APIs", "PostgreSQL"], tools: ["Git", "GitHub", "VS Code", "Figma", "Vercel"], concepts: ["Responsive Design", "UI/UX", "SPA", "PWA", "SEO"] },
+            projects: [{ title: "GrooveWave", tech: "React, TailwindCSS, SaaS", description: "Modern music streaming SaaS platform with beautiful UI, playlist management, and data visualization.", github: "github.com/bhanu2006-24/groovewave" }, { title: "Atmosphere AI", tech: "React, AI Integration, Analytics", description: "AI-powered weather application with predictive analytics and glassmorphic design.", github: "github.com/bhanu2006-24/atmosphere-ai" }, { title: "NovaNews", tech: "React, News API, Responsive Design", description: "Dynamic news aggregation platform with category filtering and mobile-first design.", github: "github.com/bhanu2006-24/novanews" }, { title: "RemoteNexus", tech: "React, Node.js, Real-time", description: "Remote work collaboration platform with real-time features and team management.", github: "github.com/bhanu2006-24/remotenexus" }, { title: "Crypto Pulse", tech: "React, TailwindCSS, API Integration", description: "Cryptocurrency tracking dashboard with live price updates and portfolio management.", github: "github.com/bhanu2006-24/crypto-pulse" }, { title: "Krishna Books", tech: "HTML5, CSS3, JavaScript, E-commerce", description: "E-commerce bookstore with shopping cart, authentication, and product filtering.", github: "github.com/bhanu2006-24/krishna-books" }]
+        };
+        function renderEditor() {
+            document.getElementById('personal-form').innerHTML = `${createInput('Full Name', 'name', state.personalInfo.name)}${createInput('Job Title', 'title', state.personalInfo.title)}${createInput('Email', 'email', state.personalInfo.email)}${createInput('Phone', 'phone', state.personalInfo.phone)}${createInput('Location', 'location', state.personalInfo.location)}${createInput('LinkedIn', 'linkedin', state.personalInfo.linkedin)}<div class="col-span-1 md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label><textarea oninput="updatePersonal('summary', this.value)" rows="3" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">${state.personalInfo.summary}</textarea></div>`;
+            document.getElementById('projects-form').innerHTML = state.projects.map((p, i) => `<div class="p-4 bg-gray-50 rounded-lg border border-gray-200"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label class="block text-sm font-medium text-gray-700 mb-1">Project Name</label><input type="text" value="${p.title}" oninput="updateProject(${i}, 'title', this.value)" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500"></div><div><label class="block text-sm font-medium text-gray-700 mb-1">Tech Stack</label><input type="text" value="${p.tech}" oninput="updateProject(${i}, 'tech', this.value)" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500"></div><div class="col-span-1 md:col-span-2"><label class="block text-sm font-medium text-gray-700 mb-1">Description</label><textarea oninput="updateProject(${i}, 'description', this.value)" rows="2" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500">${p.description}</textarea></div></div></div>`).join('');
+        }
+        function createInput(label, key, value) { return `<div class="mb-1"><label class="block text-sm font-medium text-gray-700 mb-1">${label}</label><input type="text" value="${value}" oninput="updatePersonal('${key}', this.value)" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-500 transition-colors"/></div>`; }
+        function renderPreview() {
+            const preview = document.getElementById('resume-preview');
+            preview.innerHTML = `<div class="border-b-2 border-gray-900 pb-4 mb-5"><div class="flex justify-between items-start"><div><h1 class="text-2xl font-bold uppercase tracking-wide">${state.personalInfo.name}</h1><p class="text-sm font-medium text-gray-700 mt-1">${state.personalInfo.title}</p><div class="flex gap-x-3 text-sm text-gray-600 mt-2"><span>${state.personalInfo.email}</span><span class="text-gray-400">•</span><span>${state.personalInfo.phone}</span></div></div><div class="text-right text-sm text-gray-600 space-y-1"><div>${state.personalInfo.linkedin}</div><div>${state.personalInfo.github}</div><div>${state.personalInfo.website}</div></div></div></div><div class="mb-5"><h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-2 pb-1">Professional Summary</h3><p class="text-sm text-justify leading-relaxed">${state.personalInfo.summary}</p></div><div class="mb-5"><h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Education</h3><div class="space-y-3">${state.education.map(e => `<div class="flex justify-between items-baseline"><div><h4 class="font-bold text-base">${e.school}</h4><p class="text-sm italic text-gray-700">${e.degree}</p>${e.description ? `<p class="text-xs text-gray-600 mt-1">${e.description}</p>` : ''}</div><div class="text-sm font-semibold">${e.year}</div></div>`).join('')}</div></div><div class="mb-5"><h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Technical Skills</h3><div class="text-sm space-y-2"><div class="grid grid-cols-[120px_1fr] gap-2"><span class="font-bold">Frontend:</span><span>${state.skills.frontend.join(", ")}</span></div><div class="grid grid-cols-[120px_1fr] gap-2"><span class="font-bold">Backend:</span><span>${state.skills.backend.join(", ")}</span></div><div class="grid grid-cols-[120px_1fr] gap-2"><span class="font-bold">Tools:</span><span>${state.skills.tools.join(", ")}</span></div><div class="grid grid-cols-[120px_1fr] gap-2"><span class="font-bold">Concepts:</span><span>${state.skills.concepts.join(", ")}</span></div></div></div><div class="mb-5"><h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Web Projects</h3><div class="space-y-4">${state.projects.map(p => `<div><div class="flex justify-between items-baseline"><h4 class="font-bold text-base text-gray-900">${p.title}</h4>${p.github ? `<span class="text-xs text-gray-600">${p.github}</span>` : ''}</div><p class="text-xs font-semibold text-gray-700 mb-1">Tech Stack: <span class="font-normal italic">${p.tech}</span></p><ul class="list-disc list-outside ml-4 text-sm text-gray-700"><li>${p.description}</li></ul></div>`).join('')}</div></div>`;
+        }
+        function updatePersonal(key, value) { state.personalInfo[key] = value; renderPreview(); }
+        function updateProject(index, key, value) { state.projects[index][key] = value; renderPreview(); }
+        function switchTab(tab) { const ed = document.getElementById('editor-view'), pr = document.getElementById('preview-container'), be = document.getElementById('btn-editor'), bp = document.getElementById('btn-preview'); if (tab === 'editor') { ed.classList.remove('hidden'); pr.classList.add('hidden'); be.classList.add('bg-white', 'shadow-sm', 'text-gray-800'); be.classList.remove('text-gray-600'); bp.classList.remove('bg-white', 'shadow-sm', 'text-gray-800'); bp.classList.add('text-gray-600'); } else { ed.classList.add('hidden'); pr.classList.remove('hidden'); bp.classList.add('bg-white', 'shadow-sm', 'text-gray-800'); bp.classList.remove('text-gray-600'); be.classList.remove('bg-white', 'shadow-sm', 'text-gray-800'); be.classList.add('text-gray-600'); } }
+        document.addEventListener('DOMContentLoaded', () => { renderEditor(); renderPreview(); lucide.createIcons(); });
+    </script>
+</body>
+</html>
