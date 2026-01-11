@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Developer Resume Builder</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* Custom Font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Animation */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Print Specific Styles - CRITICAL for "Download" */
+        @media print {
+            @page {
+                margin: 0;
+                size: A4;
+            }
+
+            body * {
+                visibility: hidden;
+            }
+
+            /* Hide Navbar and Editor */
+            #navbar,
+            #editor-view,
+            #tab-controls {
+                display: none !important;
+            }
+
+            /* Show Resume Preview */
+            #preview-container,
+            #resume-preview,
+            #resume-preview * {
+                visibility: visible;
+            }
+
+            #preview-container {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                padding: 0;
+                background: white;
+            }
+
+            #resume-preview {
+                width: 100% !important;
+                max-width: 100% !important;
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 40px !important;
+                /* Fixed print padding */
+                min-height: 100vh;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 min-h-screen text-gray-800">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-white shadow-sm sticky top-0 z-50 border-b border-gray-200">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="bg-purple-600 p-2 rounded-lg">
+                        <i data-lucide="gamepad-2" class="h-6 w-6 text-white"></i>
+                    </div>
+                    <h1 class="text-xl font-bold text-gray-900 hidden sm:block">Game Dev Resume Builder</h1>
+                </div>
+
+                <div id="tab-controls" class="flex space-x-2 bg-gray-100 p-1 rounded-lg">
+                    <button onclick="switchTab('editor')" id="btn-editor"
+                        class="flex items-center space-x-2 px-4 py-2 rounded-md transition-all bg-white shadow-sm text-gray-800 font-medium">
+                        <i data-lucide="edit-3" class="w-4 h-4"></i>
+                        <span>Editor</span>
+                    </button>
+                    <button onclick="switchTab('preview')" id="btn-preview"
+                        class="flex items-center space-x-2 px-4 py-2 rounded-md transition-all text-gray-600 hover:text-gray-900">
+                        <i data-lucide="eye" class="w-4 h-4"></i>
+                        <span>Preview</span>
+                    </button>
+                </div>
+
+                <button onclick="window.print()"
+                    class="flex items-center space-x-2 bg-purple-600 hover:bg-purple-700 text-white px-5 py-2.5 rounded-lg shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5 font-medium">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Download PDF</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+
+        <!-- Editor View -->
+        <div id="editor-view" class="grid grid-cols-1 gap-8 fade-in max-w-4xl mx-auto">
+
+            <!-- Personal Info Form -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6 border-b border-gray-100 bg-gray-50 flex items-center space-x-3">
+                    <div class="bg-purple-100 p-2 rounded-full">
+                        <i data-lucide="user" class="h-5 w-5 text-purple-600"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-900">Personal Details</h2>
+                </div>
+                <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6" id="personal-form">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- Projects Form -->
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div class="p-6 border-b border-gray-100 bg-gray-50 flex items-center space-x-3">
+                    <div class="bg-purple-100 p-2 rounded-full">
+                        <i data-lucide="gamepad-2" class="h-5 w-5 text-purple-600"></i>
+                    </div>
+                    <h2 class="text-lg font-semibold text-gray-900">Game Projects</h2>
+                </div>
+                <div class="p-6 space-y-6" id="projects-form">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- Note for User -->
+            <div class="text-center text-sm text-gray-500 bg-purple-50 p-4 rounded-lg border border-purple-100">
+                <p><strong>Tip:</strong> Education and Skills are pre-loaded. To keep it simple, they are editable in
+                    code or you can ask the AI to update them.</p>
+            </div>
+        </div>
+
+        <!-- Preview View -->
+        <div id="preview-container" class="hidden flex justify-center">
+            <div id="resume-preview"
+                class="bg-white shadow-2xl w-[210mm] min-h-[297mm] p-12 text-gray-900 leading-normal">
+                <!-- Content Injected via JS -->
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Initial Data ---
+        const state = {
+            personalInfo: {
+                name: "Bhanu Saini",
+                title: "Game Developer | IIT Madras Student",
+                email: "bhanupsaini2024@gmail.com",
+                phone: "+91 89497 31495",
+                location: "Jaipur, India",
+                linkedin: "linkedin.com/in/bhanu-saini-3bb251391",
+                github: "github.com/bhanu2006-24",
+                website: "bhanu2006-24.github.io/bhanu2006-24",
+                summary: "Creative Game Developer with expertise in JavaScript, Canvas, and procedural generation. Passionate about crafting immersive gaming experiences with engaging mechanics, smooth animations, and interactive gameplay. Currently pursuing Data Science at IIT Madras while building indie games."
+            },
+            education: [
+                {
+                    school: "Indian Institute of Technology, Madras",
+                    degree: "B.Sc. in Data Science",
+                    year: "2025 – 2028",
+                    description: "Strong foundation in programming, algorithms, and computational thinking."
+                },
+                {
+                    school: "Kendriya Vidyalaya No. 2, Jaipur",
+                    degree: "High School Education",
+                    year: "Graduated",
+                    description: "Strong foundation in STEM academics."
+                }
+            ],
+            skills: {
+                languages: ["JavaScript", "Python", "HTML5", "CSS3", "TypeScript"],
+                gamedev: ["Canvas API", "WebGL", "Phaser.js", "Game Physics", "Procedural Generation"],
+                tools: ["Git", "VS Code", "Figma", "Aseprite", "Tiled"],
+                concepts: ["Game Loops", "Collision Detection", "State Machines", "Animation Systems"]
+            },
+            projects: [
+                {
+                    title: "Echo Shooter",
+                    tech: "JavaScript, HTML5 Canvas, Game Physics",
+                    description: "Fast-paced 2D shooter game featuring dynamic enemy AI, particle effects, weapon systems, and score tracking. Implements smooth game loop, collision detection, and responsive controls.",
+                    github: "github.com/bhanu2006-24/Echo-shooter",
+                    website: ""
+                },
+                {
+                    title: "Antigravity Game",
+                    tech: "JavaScript, Canvas, Physics Simulation",
+                    description: "Unique platformer with gravity-flipping mechanics. Features procedural level design, physics-based puzzles, and atmospheric visuals with smooth transitions.",
+                    github: "github.com/bhanu2006-24/antigravity-game",
+                    website: ""
+                },
+                {
+                    title: "Portal Nexus",
+                    tech: "JavaScript, RPG Systems, Procedural Generation",
+                    description: "Text-based RPG with procedurally generated dungeons, inventory systems, turn-based combat, and character progression. Features save/load functionality.",
+                    github: "github.com/bhanu2006-24/portal-nexus",
+                    website: ""
+                },
+                {
+                    title: "Interactive OS Portfolio",
+                    tech: "JavaScript, CSS3, DOM Manipulation",
+                    description: "Windows-style operating system simulation running in the browser. Features draggable windows, file system, applications, and authentic OS interactions.",
+                    github: "github.com/bhanu2006-24/bhanu2006-24",
+                    website: "bhanu2006-24.github.io/bhanu2006-24"
+                }
+            ]
+        };
+
+        // --- Render Functions ---
+
+        function renderEditor() {
+            // Personal Info Inputs
+            const personalContainer = document.getElementById('personal-form');
+            personalContainer.innerHTML = `
+                ${createInput('Full Name', 'name', state.personalInfo.name)}
+                ${createInput('Job Title', 'title', state.personalInfo.title)}
+                ${createInput('Email', 'email', state.personalInfo.email)}
+                ${createInput('Phone', 'phone', state.personalInfo.phone)}
+                ${createInput('Location', 'location', state.personalInfo.location)}
+                ${createInput('LinkedIn', 'linkedin', state.personalInfo.linkedin)}
+                <div class="col-span-1 md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Professional Summary</label>
+                    <textarea 
+                        oninput="updatePersonal('summary', this.value)"
+                        rows="3"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
+                    >${state.personalInfo.summary}</textarea>
+                </div>
+            `;
+
+            // Projects Inputs
+            const projectsContainer = document.getElementById('projects-form');
+            projectsContainer.innerHTML = state.projects.map((project, index) => `
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-200 relative group hover:border-purple-300 transition-colors">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="mb-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Project Name</label>
+                            <input type="text" value="${project.title}" oninput="updateProject(${index}, 'title', this.value)" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                        <div class="mb-1">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Tech Stack</label>
+                            <input type="text" value="${project.tech}" oninput="updateProject(${index}, 'tech', this.value)" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500">
+                        </div>
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
+                            <textarea oninput="updateProject(${index}, 'description', this.value)" rows="2" class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500">${project.description}</textarea>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function createInput(label, key, value) {
+            return `
+                <div class="mb-1">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">${label}</label>
+                    <input 
+                        type="text" 
+                        value="${value}" 
+                        oninput="updatePersonal('${key}', this.value)"
+                        class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-colors"
+                    />
+                </div>
+            `;
+        }
+
+        function renderPreview() {
+            const preview = document.getElementById('resume-preview');
+
+            // Header
+            const headerHTML = `
+                <div class="border-b-2 border-gray-900 pb-4 mb-5">
+                    <div class="flex justify-between items-start">
+                        <div>
+                            <h1 class="text-2xl font-bold uppercase tracking-wide">${state.personalInfo.name}</h1>
+                            <p class="text-sm font-medium text-gray-700 mt-1">${state.personalInfo.title}</p>
+                            <div class="flex gap-x-3 text-sm text-gray-600 mt-2">
+                                <span>${state.personalInfo.email}</span>
+                                <span class="text-gray-400">•</span>
+                                <span>${state.personalInfo.phone}</span>
+                            </div>
+                        </div>
+                        <div class="text-right text-sm text-gray-600 space-y-1">
+                            <div>${state.personalInfo.linkedin}</div>
+                            <div>${state.personalInfo.github}</div>
+                            <div>${state.personalInfo.website}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Summary
+            const summaryHTML = `
+                <div class="mb-5">
+                    <h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-2 pb-1">Professional Summary</h3>
+                    <p class="text-sm text-justify leading-relaxed">${state.personalInfo.summary}</p>
+                </div>
+            `;
+
+            // Education
+            const educationHTML = `
+                <div class="mb-5">
+                    <h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Education</h3>
+                    <div class="space-y-3">
+                        ${state.education.map(edu => `
+                            <div class="flex flex-col sm:flex-row justify-between sm:items-baseline">
+                                <div>
+                                    <h4 class="font-bold text-base">${edu.school}</h4>
+                                    <p class="text-sm italic text-gray-700">${edu.degree}</p>
+                                    ${edu.description ? `<p class="text-xs text-gray-600 mt-1">${edu.description}</p>` : ''}
+                                </div>
+                                <div class="text-sm font-semibold whitespace-nowrap mt-1 sm:mt-0">${edu.year}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            // Skills
+            const skillsHTML = `
+                <div class="mb-5">
+                    <h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Technical Skills</h3>
+                    <div class="text-sm space-y-2">
+                        <div class="grid grid-cols-[120px_1fr] gap-2">
+                            <span class="font-bold text-gray-800">Languages:</span>
+                            <span>${state.skills.languages.join(", ")}</span>
+                        </div>
+                        <div class="grid grid-cols-[120px_1fr] gap-2">
+                            <span class="font-bold text-gray-800">Game Dev:</span>
+                            <span>${state.skills.gamedev.join(", ")}</span>
+                        </div>
+                        <div class="grid grid-cols-[120px_1fr] gap-2">
+                            <span class="font-bold text-gray-800">Tools:</span>
+                            <span>${state.skills.tools.join(", ")}</span>
+                        </div>
+                        <div class="grid grid-cols-[120px_1fr] gap-2">
+                            <span class="font-bold text-gray-800">Concepts:</span>
+                            <span>${state.skills.concepts.join(", ")}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Projects
+            const projectsHTML = `
+                <div class="mb-5">
+                    <h3 class="font-bold text-sm uppercase tracking-wider border-b border-gray-300 mb-3 pb-1">Game Projects</h3>
+                    <div class="space-y-4">
+                        ${state.projects.map(proj => `
+                            <div>
+                                <div class="flex justify-between items-baseline">
+                                    <h4 class="font-bold text-base text-gray-900">${proj.title}</h4>
+                                    ${proj.github ? `<span class="text-xs text-gray-600">${proj.github}</span>` : ''}
+                                </div>
+                                <p class="text-xs font-semibold text-gray-700 mb-1">
+                                    Tech Stack: <span class="font-normal italic">${proj.tech}</span>
+                                </p>
+                                <ul class="list-disc list-outside ml-4 text-sm text-gray-700 leading-snug">
+                                    <li>${proj.description}</li>
+                                </ul>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+
+            preview.innerHTML = headerHTML + summaryHTML + educationHTML + skillsHTML + projectsHTML;
+        }
+
+        // --- Logic ---
+
+        function updatePersonal(key, value) {
+            state.personalInfo[key] = value;
+            renderPreview();
+        }
+
+        function updateProject(index, key, value) {
+            state.projects[index][key] = value;
+            renderPreview();
+        }
+
+        function switchTab(tab) {
+            const editorView = document.getElementById('editor-view');
+            const previewContainer = document.getElementById('preview-container');
+            const btnEditor = document.getElementById('btn-editor');
+            const btnPreview = document.getElementById('btn-preview');
+
+            if (tab === 'editor') {
+                editorView.classList.remove('hidden');
+                previewContainer.classList.add('hidden');
+
+                btnEditor.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+                btnEditor.classList.remove('text-gray-600', 'hover:text-gray-900');
+
+                btnPreview.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btnPreview.classList.add('text-gray-600', 'hover:text-gray-900');
+            } else {
+                editorView.classList.add('hidden');
+                previewContainer.classList.remove('hidden');
+
+                btnPreview.classList.add('bg-white', 'shadow-sm', 'text-gray-800');
+                btnPreview.classList.remove('text-gray-600', 'hover:text-gray-900');
+
+                btnEditor.classList.remove('bg-white', 'shadow-sm', 'text-gray-800');
+                btnEditor.classList.add('text-gray-600', 'hover:text-gray-900');
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderEditor();
+            renderPreview();
+            lucide.createIcons();
+        });
+
+    </script>
+</body>
+
+</html>
