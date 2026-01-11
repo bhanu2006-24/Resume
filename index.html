@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhanu Saini | Resume Portfolio</title>
+    <meta name="description" content="Professional resume portfolio of Bhanu Saini - Web Developer, Data Analyst, Data Scientist, and Game Developer">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+        }
+        
+        .card-gradient {
+            background: linear-gradient(145deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .glow-effect {
+            box-shadow: 0 0 40px rgba(99, 102, 241, 0.15);
+        }
+        
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+        
+        .icon-glow {
+            filter: drop-shadow(0 0 8px currentColor);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .animate-pulse-slow {
+            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .bg-grid {
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+        
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orb-float 20s ease-in-out infinite;
+        }
+        
+        @keyframes orb-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(50px, -30px) scale(1.1); }
+            50% { transform: translate(-30px, 50px) scale(0.9); }
+            75% { transform: translate(-50px, -20px) scale(1.05); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen text-white overflow-x-hidden">
+    <!-- Background Effects -->
+    <div class="fixed inset-0 bg-grid pointer-events-none"></div>
+    <div class="orb w-96 h-96 bg-indigo-600 top-0 left-0"></div>
+    <div class="orb w-80 h-80 bg-purple-600 bottom-0 right-0" style="animation-delay: -5s;"></div>
+    <div class="orb w-64 h-64 bg-emerald-600 top-1/2 left-1/2" style="animation-delay: -10s;"></div>
+    
+    <!-- Header -->
+    <header class="relative z-10 py-8">
+        <nav class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center glow-effect">
+                        <i data-lucide="file-text" class="w-6 h-6 text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold text-gradient">Resume Portfolio</h1>
+                        <p class="text-xs text-gray-400">by Bhanu Saini</p>
+                    </div>
+                </div>
+                <a href="https://github.com/bhanu2006-24" target="_blank" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all">
+                    <i data-lucide="github" class="w-5 h-5"></i>
+                    <span class="hidden sm:inline text-sm">GitHub</span>
+                </a>
+            </div>
+        </nav>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="relative z-10 py-16 md:py-24">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center space-x-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse-slow"></span>
+                <span class="text-sm text-gray-300">IIT Madras Student</span>
+            </div>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6">
+                <span class="text-gradient">Bhanu Saini</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 leading-relaxed">
+                🌐 Web Developer • 📊 Data Analyst • 🤖 Data Scientist • 🎮 Game Developer
+            </p>
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <a href="mailto:bhanupsaini2024@gmail.com" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
+                    <i data-lucide="mail" class="w-4 h-4 text-indigo-400"></i>
+                    <span>bhanupsaini2024@gmail.com</span>
+                </a>
+                <a href="https://bhanu-thedataanalyst.pages.dev" target="_blank" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
+                    <i data-lucide="globe" class="w-4 h-4 text-emerald-400"></i>
+                    <span>Portfolio</span>
+                </a>
+                <a href="https://linkedin.com/in/bhanu-saini-3bb251391" target="_blank" class="flex items-center space-x-2 px-4 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm">
+                    <i data-lucide="linkedin" class="w-4 h-4 text-blue-400"></i>
+                    <span>LinkedIn</span>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Resume Cards -->
+    <section class="relative z-10 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-gradient">My Resumes</h2>
+                <p class="text-gray-400 max-w-xl mx-auto">Choose the resume that best fits the role you're applying for. Each resume is tailored with relevant projects and skills.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Web Dev Resume Card -->
+                <a href="webdev-resume.html" class="card-gradient rounded-2xl p-8 card-hover glow-effect block group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center animate-float">
+                            <i data-lucide="code-2" class="w-8 h-8 text-white icon-glow"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-6 h-6 text-gray-500 group-hover:text-indigo-400 transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-indigo-300 transition-colors">Web Developer</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Full-stack web development with React, Node.js, and modern UI frameworks. Features projects like GrooveWave, Atmosphere AI, and NovaNews.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">React</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-blue-500/20 text-blue-300 border border-blue-500/30">Node.js</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">TailwindCSS</span>
+                    </div>
+                </a>
+                
+                <!-- Data Analyst Resume Card -->
+                <a href="analyst-resume.html" class="card-gradient rounded-2xl p-8 card-hover glow-effect block group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-600 flex items-center justify-center animate-float" style="animation-delay: -1s;">
+                            <i data-lucide="bar-chart-3" class="w-8 h-8 text-white icon-glow"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-6 h-6 text-gray-500 group-hover:text-blue-400 transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-blue-300 transition-colors">Data Analyst</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Data analysis with Python, SQL, and Tableau. Interactive dashboards, data visualization, and insights from complex datasets.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs bg-blue-500/20 text-blue-300 border border-blue-500/30">Python</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">SQL</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-teal-500/20 text-teal-300 border border-teal-500/30">Tableau</span>
+                    </div>
+                </a>
+                
+                <!-- Data Science Resume Card -->
+                <a href="datascience-resume.html" class="card-gradient rounded-2xl p-8 card-hover glow-effect block group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center animate-float" style="animation-delay: -2s;">
+                            <i data-lucide="brain" class="w-8 h-8 text-white icon-glow"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-6 h-6 text-gray-500 group-hover:text-emerald-400 transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-300 transition-colors">Data Scientist</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Machine learning, deep learning, and predictive modeling. Building ML pipelines with TensorFlow, PyTorch, and advanced analytics.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">TensorFlow</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-teal-500/20 text-teal-300 border border-teal-500/30">PyTorch</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-green-500/20 text-green-300 border border-green-500/30">ML</span>
+                    </div>
+                </a>
+                
+                <!-- Game Dev Resume Card -->
+                <a href="game-resume.html" class="card-gradient rounded-2xl p-8 card-hover glow-effect block group">
+                    <div class="flex items-start justify-between mb-6">
+                        <div class="w-16 h-16 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center animate-float" style="animation-delay: -3s;">
+                            <i data-lucide="gamepad-2" class="w-8 h-8 text-white icon-glow"></i>
+                        </div>
+                        <i data-lucide="arrow-up-right" class="w-6 h-6 text-gray-500 group-hover:text-purple-400 transition-colors"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3 text-white group-hover:text-purple-300 transition-colors">Game Developer</h3>
+                    <p class="text-gray-400 mb-6 text-sm leading-relaxed">Game development with JavaScript, Canvas, and procedural generation. Creating immersive experiences like Echo Shooter and Portal Nexus.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 rounded-full text-xs bg-purple-500/20 text-purple-300 border border-purple-500/30">JavaScript</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-pink-500/20 text-pink-300 border border-pink-500/30">Canvas</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-fuchsia-500/20 text-fuchsia-300 border border-fuchsia-500/30">WebGL</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="relative z-10 py-12 border-t border-white/5">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <p class="text-gray-500 text-sm">Built with ❤️ by Bhanu Saini • IIT Madras BS Student</p>
+            <p class="text-gray-600 text-xs mt-2">© 2026 All rights reserved</p>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
