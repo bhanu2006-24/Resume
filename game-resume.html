@@ -40,12 +40,10 @@
     </nav>
     <main class="max-w-6xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
         <div id="editor-view" class="grid grid-cols-1 gap-6 fade-in max-w-4xl mx-auto">
-            <!-- Personal Info -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="p-4 border-b border-gray-100 bg-gray-50 flex items-center space-x-3"><div class="bg-purple-100 p-2 rounded-full"><i data-lucide="user" class="h-5 w-5 text-purple-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Personal Details</h2></div>
                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4" id="personal-form"></div>
             </div>
-            <!-- Education -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
                     <div class="flex items-center space-x-3"><div class="bg-green-100 p-2 rounded-full"><i data-lucide="graduation-cap" class="h-5 w-5 text-green-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Education</h2></div>
@@ -53,12 +51,10 @@
                 </div>
                 <div class="p-6 space-y-4" id="education-form"></div>
             </div>
-            <!-- Skills -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="p-4 border-b border-gray-100 bg-gray-50 flex items-center space-x-3"><div class="bg-pink-100 p-2 rounded-full"><i data-lucide="wrench" class="h-5 w-5 text-pink-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Skills</h2></div>
                 <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4" id="skills-form"></div>
             </div>
-            <!-- Projects -->
             <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <div class="p-4 border-b border-gray-100 bg-gray-50 flex items-center justify-between">
                     <div class="flex items-center space-x-3"><div class="bg-purple-100 p-2 rounded-full"><i data-lucide="gamepad-2" class="h-5 w-5 text-purple-600"></i></div><h2 class="text-lg font-semibold text-gray-900">Game Projects</h2></div>
@@ -71,14 +67,15 @@
     </main>
     <script>
         const state = {
-            personalInfo: { name: "Bhanu Saini", title: "Game Developer | IIT Madras Student", email: "bhanupsaini2024@gmail.com", phone: "+91 89497 31495", location: "Jaipur, India", linkedin: "linkedin.com/in/bhanu-saini-3bb251391", github: "github.com/bhanu2006-24", website: "bhanu2006-24.github.io/bhanu2006-24", summary: "Creative Game Developer with expertise in JavaScript, Canvas, and procedural generation. Passionate about crafting immersive gaming experiences with engaging mechanics, smooth animations, and interactive gameplay." },
+            personalInfo: { name: "Bhanu Saini", title: "Game Developer | IIT Madras Student", email: "bhanupsaini2024@gmail.com", phone: "+91 89497 31495", location: "Jaipur, India", linkedin: "linkedin.com/in/bhanu-saini-3bb251391", github: "github.com/bhanu2006-24", website: "bhanu2006-24.github.io/bhanu2006-24", summary: "Creative Game Developer specializing in JavaScript, Canvas, Three.js, and procedural generation. Passionate about crafting immersive gaming experiences with engaging mechanics, smooth animations, and interactive gameplay. Building neon-themed cyberpunk games with modern web technologies." },
             education: [{ school: "Indian Institute of Technology, Madras", degree: "B.Sc. in Data Science", year: "2025 – 2028", description: "Strong foundation in programming, algorithms, and computational thinking." }, { school: "Kendriya Vidyalaya No. 2, Jaipur", degree: "High School Education", year: "Graduated", description: "Strong foundation in STEM academics." }],
-            skills: { languages: "JavaScript, Python, HTML5, CSS3, TypeScript", gamedev: "Canvas API, WebGL, Phaser.js, Game Physics, Procedural Generation", tools: "Git, VS Code, Figma, Aseprite, Tiled", concepts: "Game Loops, Collision Detection, State Machines, Animation Systems" },
+            skills: { languages: "JavaScript, TypeScript, Python, HTML5, CSS3", gamedev: "Canvas API, Three.js, WebGL, Phaser.js, Game Physics, Procedural Generation", tools: "Git, VS Code, Figma, Aseprite, Tiled, GSAP", concepts: "Game Loops, Collision Detection, State Machines, Animation Systems, RPG Systems" },
             projects: [
-                { title: "Echo Shooter", tech: "JavaScript, HTML5 Canvas, Game Physics", description: "Fast-paced 2D shooter with dynamic enemy AI, particle effects, weapon systems, and score tracking.", github: "github.com/bhanu2006-24/Echo-shooter", website: "bhanu2006-24.github.io/Echo-shooter" },
-                { title: "Antigravity Game", tech: "JavaScript, Canvas, Physics Simulation", description: "Unique platformer with gravity-flipping mechanics, procedural levels, and physics-based puzzles.", github: "github.com/bhanu2006-24/antigravity-game", website: "bhanu2006-24.github.io/antigravity-game" },
-                { title: "Portal Nexus", tech: "JavaScript, RPG Systems, Procedural Generation", description: "Text-based RPG with procedurally generated dungeons, inventory systems, and turn-based combat.", github: "github.com/bhanu2006-24/portal-nexus", website: "bhanu2006-24.github.io/portal-nexus" },
-                { title: "Interactive OS Portfolio", tech: "JavaScript, CSS3, DOM Manipulation", description: "Windows-style OS simulation with draggable windows, file system, and authentic OS interactions.", github: "github.com/bhanu2006-24/bhanu2006-24", website: "bhanu2006-24.github.io/bhanu2006-24" }
+                { title: "Neon Velocity", tech: "Three.js, JavaScript, Endless Runner", description: "High-speed 3D endless racing game with neon-lit cyberpunk highways, traffic dodging, power-ups, nitro boosts, and near-miss multipliers.", github: "github.com/bhanu2006-24/neon-velocity", website: "bhanu2006-24.github.io/neon-velocity" },
+                { title: "Neon Maze", tech: "Three.js, JavaScript, Procedural Generation", description: "First-person 3D maze escape game with cyberpunk visuals, procedurally generated labyrinths, glowing orbs, and laser traps.", github: "github.com/bhanu2006-24/neon-maze", website: "bhanu2006-24.github.io/neon-maze" },
+                { title: "Bomber Legends", tech: "React, TypeScript, Grid-based Game", description: "Classic arcade-style bomber game with grid-based levels, bomb placement, destructible obstacles, enemies, and power-ups.", github: "github.com/bhanu2006-24/bomber-legends", website: "bhanu2006-24.github.io/bomber-legends" },
+                { title: "Antigravity Game", tech: "JavaScript, Canvas, Top-Down Shooter", description: "Fast-paced top-down shooter with dash mechanics, enemy waves, boss battles, level progression, and buff systems.", github: "github.com/bhanu2006-24/antigravity-game", website: "bhanu2006-24.github.io/antigravity-game" },
+                { title: "Neon City: Undead Rising", tech: "JavaScript, RPG Systems, Combat", description: "Cyberpunk RPG with undead enemies, combat systems, and immersive neon-lit city exploration.", github: "github.com/bhanu2006-24/neon-city", website: "bhanu2006-24.github.io/neon-city" }
             ]
         };
         function renderEditor() {
